@@ -4,3 +4,33 @@
     justify-content: center;
     flex-direction: column;
 }
+.size-unchangeable{
+    resize: none;
+}
+.enter-button{
+    margin-top: 10px;
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.back-button{
+    margin-right: 10px;
+}
+
+.enter-area{
+    display: flex;
+    place-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.input-area{
+    margin-left: 10px;
+}
+.card{
+    padding: 30px;
+    background-color: #535bf230;
+    border-radius: 50px;
+    box-shadow: #1a1a1a 0 0 50px;
+    text-align: center;
+}
