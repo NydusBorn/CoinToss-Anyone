@@ -1,5 +1,21 @@
 ﻿import React from 'react'
 import './LoginForm.css'
+import {HttpProxy} from "vite";
+import {Simulate} from "react-dom/test-utils";
+import resize = Simulate.resize;
+
+function api<T>(url: string): Promise<T> {
+    return fetch(url, {mode: "no-cors"})
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(response.status.toString())
+            }
+            return response.json() as Promise<{ data: T }>
+        })
+        .then(data => {
+            return data.data
+        })
+}
 
 function LoginForm() {
     const [username, setUsername] = React.useState("");
@@ -9,12 +25,14 @@ function LoginForm() {
     const [userSelected, setUserSelected] = React.useState(false);
     const newUserGreeting = `New user will be created with name '${username}'`;
     const existingUserGreeting = `Existing user with name '${username}' will be logged in`;
+    const newUserButton = "Create new user";
+    const existingUserButton = "Login";
     let greeting:string = newUserGreeting;
     let userExists = false;
+    let buttonText = newUserButton;
     return (
         <>
             <h1>Welcome to a Casino Anyplay instance</h1>
-
 
             <div hidden={userSelected} className={"card"} >
                 <div className={"enter-area"}>
@@ -28,14 +46,16 @@ function LoginForm() {
                         setUsername(inputuser);
                         setUserSelected(true);
                         //TODO: look whether name exists and determine whether to use alternative greeting
-                        if (true) {
+                        if (api(`https://localhost:7237/Users/GetUserExists?username=${inputuser}`)) {
                             greeting = newUserGreeting;
+                            buttonText = newUserButton;
                         }
                         else{
                             greeting = existingUserGreeting;
+                            buttonText = existingUserButton;
                         }
                     }
-                }}>Enter</button>
+                }}>Next</button>
             </div>
             
             <div hidden={!userSelected} className={"card"}>
@@ -60,7 +80,7 @@ function LoginForm() {
                         setPassword(inputpass);
                         setUserSelected(true);
                     }
-                }}>Enter</button>
+                }}>{buttonText}</button>
             </div>
         </>
     )
