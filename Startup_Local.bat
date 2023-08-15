@@ -1,2 +1,2 @@
-cd anyplay-client
+cd lie-client
 npx vite

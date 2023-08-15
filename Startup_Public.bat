@@ -1,2 +1,2 @@
-cd anyplay-client
-npx vite --host
+cd lie-client
+npx vite --host --port 40002
