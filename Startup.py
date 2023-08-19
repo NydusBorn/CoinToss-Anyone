@@ -132,6 +132,7 @@ else:
         answer = input()
         if answer == "quit":
             time.sleep(1)
+            #TODO: look into linux version, better if can assign custom name
             processes_after_launch = get_current_processes()
             kill_new_with_name("node.exe", processes_before_launch, processes_after_launch)
             break
