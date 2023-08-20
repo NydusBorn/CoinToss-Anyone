@@ -33,3 +33,13 @@
     box-shadow: #1a1a1a 0 0 50px;
     text-align: center;
 }
+
+.error-card{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 2px;
+    background-color: darkred;
+    border-radius: 5px;
+    box-shadow: #1a1a1a 0 0 50px;
+    text-align: center;
+}

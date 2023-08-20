@@ -61,9 +61,34 @@ function LoginForm() {
     const [greeting, setGreeting] = React.useState(newUserGreeting); 
     const [userExists, setUserExists] = React.useState(false);
     const [buttonText, setButtonText] = React.useState(newUserButton);
-
+    const [errorHidden, setErrorHidden] = React.useState(true);
+    const [currentError, setCurrentError] = React.useState("Default error");
+    
+    function checkUsername(){
+        if (username.length > 256){
+            setErrorHidden(false);
+            setCurrentError("Username too long: must be less than 256 characters");
+        }
+        else {
+            setErrorHidden(true);
+        }
+    }
+    function checkPassword(){
+        if (password.length > 256){
+            setErrorHidden(false);
+            setCurrentError("Password too long: must be less than 256 characters");
+        }
+        else if (password.length < 8){
+            setErrorHidden(false);
+            setCurrentError("Password too short: must be at least 8 characters");
+        }
+        else{
+            setErrorHidden(true);
+        }
+    }
     async function enterLogin(){
-        if (username !== ""){
+        checkUsername();
+        if (username !== "" && errorHidden){
             setUserSelected(true);
             const exists = await apiGet<boolean>(`http://localhost:8080/user/exists?username=${username}`); 
             if (!exists) {
@@ -80,7 +105,8 @@ function LoginForm() {
     }
     
     async function enterPassword(){
-        if (password !== ""){
+        checkPassword()
+        if (password !== "" && errorHidden){
             if (userExists){
                 const credentialsCorrect = await apiGet<boolean>(`http://localhost:8080/user/credentialsCorrect?username=${username}&password=${password}`);
                 if (credentialsCorrect) {
@@ -89,7 +115,7 @@ function LoginForm() {
                     window.location.href = "";
                 }
                 else if (!credentialsCorrect){
-                    //TODO: notify that password is incorrect
+                    setErrorHidden(true);
                 }
             }
             else{
@@ -114,7 +140,11 @@ function LoginForm() {
                     <header className="">Login</header>
                     <textarea className="size-unchangeable input-area" name="user_login" onChange={(e)=>{
                         setUsername(e.target.value);
+                        checkUsername();
                     }}></textarea>
+                </div>
+                <div hidden={errorHidden} className={"error-card"} >
+                    <p>{currentError}</p>
                 </div>
                 <button className="enter-button" onClick={enterLogin}>Next</button>
             </div>
@@ -128,7 +158,11 @@ function LoginForm() {
                     <header className="">Password</header>
                     <textarea className="size-unchangeable input-area" name="user_password" onChange={(e)=>{
                         setPassword(e.target.value);
+                        checkPassword();
                     }}></textarea>
+                </div>
+                <div hidden={errorHidden} className={"error-card"} >
+                    <p>{currentError}</p>
                 </div>
                 <button className="enter-button" onClick={enterPassword}>{buttonText}</button>
             </div>
