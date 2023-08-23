@@ -1,6 +1,7 @@
 import React from 'react'
 import LoginForm from './LoginForm'
 import './Starter.css'
+import MainPage from "./MainPage.tsx";
 
 function Starter() {
     const login_data = [localStorage.getItem('login'), localStorage.getItem('password')]
@@ -8,10 +9,7 @@ function Starter() {
         // code to look up the user in a database
         return (
             <React.StrictMode>
-                <button className="" onClick={() => {
-                    localStorage.clear()
-                    window.location.href = ''
-                }}>Exit user</button>
+                <MainPage />
             </React.StrictMode>
         )
     }else{
