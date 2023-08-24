@@ -1,0 +1,46 @@
+﻿.settingsPageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    text-align: center;
+}
+.card {
+    padding: 1px;
+    background-color: #535bf230;
+    border-radius: 15px;
+    box-shadow: #1a1a1a 0 0 50px;
+    width: calc(100% - 40px);
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cardDescriptor {
+    margin-left: 10px;
+    text-align: left;
+}
+
+.cardSpacer {
+    flex-grow: 1;
+}
+
+.cardField{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+    height: 30px;
+    font-size: 25px;
+}
+
+.exitButton {
+    width: 200px;
+    background-color: #4b0000b0;
+    margin-top: auto;
+    margin-bottom: 10px;
+}

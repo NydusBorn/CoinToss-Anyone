@@ -1,5 +1,6 @@
 ﻿import React from "react";
-import "./MainPage.css"
+import sassmod from "./MainPage.module.scss"
+import SettingsPage from "./SettingsPage.tsx";
 
 function MainPage(){
     const [showCoinToss, setShowCoinToss] = React.useState(true);
@@ -7,24 +8,24 @@ function MainPage(){
     const [showSettings, setShowSettings] = React.useState(false);
     
     return(
-        <>
-            <div className={"sidebar"}>
-                <button className={"sidebar-button"} onClick={()=>{
+        <div className={sassmod.mainPage}>
+            <div className={sassmod.sidebar}>
+                <button className={sassmod.sidebarButton} onClick={()=>{
                     setShowCoinToss(false);
                     setShowSlots(true);
                     setShowSettings(true);
                 }}>
                     Coin Toss
                 </button>
-                <button className={"sidebar-button"} onClick={()=>{
+                <button className={sassmod.sidebarButton} onClick={()=>{
                     setShowCoinToss(true);
                     setShowSlots(false);
                     setShowSettings(true);
                 }}>
                     Slots
                 </button>
-                <div className={"sidebar-spacer"}/>
-                <button className={"sidebar-button"} onClick={()=>{
+                <div className={sassmod.sidebarSpacer}/>
+                <button className={sassmod.sidebarButton} onClick={()=>{
                     setShowCoinToss(true);
                     setShowSlots(true);
                     setShowSettings(false);
@@ -32,7 +33,8 @@ function MainPage(){
                     Settings
                 </button>
             </div>
-            <div className={"page-container"}>
+            <div className={sassmod.pageSplitter}/>
+            <div className={sassmod.pageContainer}>
                 <div hidden={showCoinToss}>
                     {/*TODO: Coin toss game page */}
                 </div>
@@ -40,10 +42,10 @@ function MainPage(){
                     {/*TODO: Slots game page*/}
                 </div>
                 <div hidden={showSettings}>
-                    {/*TODO: setting page page*/}
+                    <SettingsPage/>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

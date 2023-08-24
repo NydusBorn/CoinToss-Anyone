@@ -1,31 +1,31 @@
-﻿#root{
+﻿.loginForm{
     display: flex;
     place-items: center;
     justify-content: center;
     flex-direction: column;
 }
-.size-unchangeable{
-    resize: none;
-}
-.enter-button{
+
+.enterButton{
     margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.back-button{
+.backButton{
     margin-right: 10px;
 }
 
-.enter-area{
+.enterArea{
     display: flex;
     place-items: center;
     justify-content: center;
     flex-direction: row;
 }
-.input-area{
+
+.inputArea{
     margin-left: 10px;
 }
+
 .card{
     padding: 30px;
     background-color: #535bf230;
@@ -34,7 +34,7 @@
     text-align: center;
 }
 
-.error-card{
+.errorCard{
     margin-top: 10px;
     margin-bottom: 5px;
     padding: 2px;

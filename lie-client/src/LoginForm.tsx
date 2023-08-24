@@ -1,6 +1,10 @@
 ﻿import React from 'react'
-import './LoginForm.css'
+import sassmod from './LoginForm.module.scss'
 import * as utility from "./Utility.ts";
+import sassutil from "./Utility.module.scss"
+import classNames from 'classnames';
+
+//TODO: animations
 
 function LoginForm() {
     const [username, setUsername] = React.useState("");
@@ -15,7 +19,7 @@ function LoginForm() {
     const [buttonText, setButtonText] = React.useState(newUserButton);
     const [errorHidden, setErrorHidden] = React.useState(true);
     const [currentError, setCurrentError] = React.useState("Default error");
-    
+    console.log(sassmod)
     function checkUsername(){
         if (username.length > 256){
             setErrorHidden(false);
@@ -84,41 +88,41 @@ function LoginForm() {
     }
     
     return (
-        <>
+        <div className={sassmod.loginForm}>
             <h1>Welcome to a Casino Lie instance</h1>
 
-            <div hidden={userSelected} className={"card"} >
-                <div className={"enter-area"}>
-                    <header className="">Login</header>
-                    <textarea className="size-unchangeable input-area" name="user_login" onChange={(e)=>{
+            <div hidden={userSelected} className={sassmod.card} >
+                <div className={sassmod.enterArea}>
+                    <header>Login</header>
+                    <textarea className={classNames(sassutil.sizeUnchangeable, sassmod.inputArea)} name="user_login" onChange={(e)=>{
                         setUsername(e.target.value);
                         checkUsername();
                     }}></textarea>
                 </div>
-                <div hidden={errorHidden} className={"error-card"} >
+                <div hidden={errorHidden} className={sassmod.errorCard} >
                     <p>{currentError}</p>
                 </div>
-                <button className="enter-button" onClick={enterLogin}>Next</button>
+                <button className={sassmod.enterButton} onClick={enterLogin}>Next</button>
             </div>
             
-            <div hidden={!userSelected} className={"card"}>
+            <div hidden={!userSelected} className={sassmod.card}>
                 <h2>{`${greeting}`}</h2>
-                <div className={"enter-area"}>
-                    <button className={"back-button"} onClick={()=>{
+                <div className={sassmod.enterArea}>
+                    <button className={sassmod.backButton} onClick={()=>{
                         setUserSelected(false);
                     }}>back</button>
-                    <header className="">Password</header>
-                    <textarea className="size-unchangeable input-area" name="user_password" onChange={(e)=>{
+                    <header >Password</header>
+                    <textarea className={classNames(sassutil.sizeUnchangeable, sassmod.inputArea)} name="user_password" onChange={(e)=>{
                         setPassword(e.target.value);
                         checkPassword();
                     }}></textarea>
                 </div>
-                <div hidden={errorHidden} className={"error-card"} >
+                <div hidden={errorHidden} className={sassmod.errorCard} >
                     <p>{currentError}</p>
                 </div>
-                <button className="enter-button" onClick={enterPassword}>{buttonText}</button>
+                <button className={sassmod.enterButton} onClick={enterPassword}>{buttonText}</button>
             </div>
-        </>
+        </div>
     )
 }
 
