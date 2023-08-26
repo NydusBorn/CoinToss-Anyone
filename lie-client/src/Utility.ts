@@ -1,5 +1,15 @@
-﻿export async function apiGet<T>(url: string): Promise<T> {
-    const Response = await fetch(url);
+﻿export function prepareMap(data:Map<string,string>) : object{
+    return Object.fromEntries(Array.from(data));
+}
+
+export function sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export async function apiGet<T>(url: string): Promise<T> {
+    const Response = await fetch(url, {
+        method: "GET"
+    });
     if (Response.ok) {
         return Response.json() as T;
     }
@@ -10,7 +20,6 @@
         console.log(`status code: ${Response.status}`);
         console.log(`status text: ${Response.statusText}`);
         console.log(`url: ${Response.url}`);
-
         console.log(`body: ${typeof Response.body}`);
         console.log(`json: ${await Response.json()}`);
         throw new Error("Get failure");
@@ -38,6 +47,6 @@ export async function apiPost<T>(url: string, data: object): Promise<T> {
         console.log(`body: ${typeof Response.body}`);
         console.log(`request body: ${JSON.stringify(data)}`)
         console.log(`json: ${await Response.json()}`);
-        throw new Error("Get failure");
+        throw new Error("Post failure");
     }
 }

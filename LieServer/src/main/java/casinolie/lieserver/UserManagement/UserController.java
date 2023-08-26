@@ -11,6 +11,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -43,6 +44,7 @@ public class UserController {
         String password = requestData.get("password");
         UserEntity newUser = new UserEntity();
         newUser.setUsername(username);
+        newUser.setPerceivedName(username);
         String hash = getPasswordHash(password);
         if (hash == null) {
             return false; 
@@ -71,6 +73,31 @@ public class UserController {
                 if (hash.equals(user.getPasswordHash())) {
                     return true;
                 }
+            }
+        }
+        return false;
+    }
+    
+    @GetMapping("/user/cash")
+    public Optional<Long> getCash(@RequestParam String username, @RequestParam String password) {
+        for (var user:userRepository.findAll()) {
+            if (Objects.equals(user.getUsername(), username) && Objects.equals(user.getPasswordHash(), getPasswordHash(password))) {
+                return Optional.of(user.getCash());
+            }
+        }
+        return Optional.empty();
+    }
+    
+    @PostMapping("/user/resetCash")
+    public Boolean resetCash(@RequestBody Map<String,String> requestData) {
+        String username = requestData.get("username");
+        String password = requestData.get("password");
+        String hash = getPasswordHash(password);
+        for (var user:userRepository.findAll()) {
+            if (Objects.equals(user.getUsername(), username) && Objects.equals(user.getPasswordHash(), hash)) {
+                user.setCash(100L);
+                userRepository.save(user);
+                return true;
             }
         }
         return false;

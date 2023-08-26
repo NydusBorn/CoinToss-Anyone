@@ -19,8 +19,8 @@ function LoginForm() {
     const [buttonText, setButtonText] = React.useState(newUserButton);
     const [errorHidden, setErrorHidden] = React.useState(true);
     const [currentError, setCurrentError] = React.useState("Default error");
-    console.log(sassmod)
-    function checkUsername(){
+    
+    function checkUsername() {
         if (username.length > 256){
             setErrorHidden(false);
             setCurrentError("Username too long: must be less than 256 characters");
@@ -71,14 +71,15 @@ function LoginForm() {
                     window.location.href = "";
                 }
                 else if (!credentialsCorrect){
-                    setErrorHidden(true);
+                    setCurrentError("Wrong password");
+                    setErrorHidden(false);
                 }
             }
             else{
-                await utility.apiPost<boolean>(`http://localhost:8080/user/register`, Object.fromEntries(Array.from(new Map<string, string>([
+                await utility.apiPost<boolean>(`http://localhost:8080/user/register`, utility.prepareMap(new Map<string, string>([
                     ["username", username],
                     ["password", password]
-                ]))));
+                ])));
                 localStorage.setItem("login", username);
                 localStorage.setItem("password", password);
                 window.location.href = "";
