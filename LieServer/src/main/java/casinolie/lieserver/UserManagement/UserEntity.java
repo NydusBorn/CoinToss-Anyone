@@ -52,7 +52,7 @@ public class UserEntity {
     
     @DecimalMin("0.0")
     @DecimalMax("1.0")
-    private Double coinTossLuck = 0.5;
+    private Double coinTossLuck;
 
     public Double getCoinTossLuck() {
         return coinTossLuck;
@@ -64,7 +64,7 @@ public class UserEntity {
     
     @DecimalMin("0.0")
     @DecimalMax("1.0")
-    private Double slotsLuck = 0.5;
+    private Double slotsLuck;
 
     public Double getSlotsLuck() {
         return slotsLuck;
@@ -74,7 +74,7 @@ public class UserEntity {
         this.slotsLuck = slotsLuck;
     }
     
-    private Long cash = 100L;
+    private Long cash;
 
     public Long getCash() {
         return cash;

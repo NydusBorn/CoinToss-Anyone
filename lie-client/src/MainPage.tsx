@@ -2,6 +2,7 @@
 import sassmod from "./MainPage.module.scss"
 import SettingsPage from "./SettingsPage.tsx";
 import * as utility from "./Utility.ts";
+
 function MainPage(){
     const [showCoinToss, setShowCoinToss] = React.useState(true);
     const [showSlots, setShowSlots] = React.useState(true);
@@ -11,6 +12,7 @@ function MainPage(){
     
     async function getCash(){
         if (startedPolling) return;
+        localStorage.setItem("requireRefresh", "Yes");
         setStartedPolling(true);
         while (true){
             await utility.sleep(1000);

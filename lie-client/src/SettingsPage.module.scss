@@ -30,12 +30,30 @@
     flex-grow: 1;
 }
 
+.cardFieldContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .cardField{
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 10px;
     height: 30px;
     font-size: 25px;
+}
+
+.cardFieldError{
+    color: red;
+}
+
+.cardError{
+    background-color: #4b0000b0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    width: 100%;
 }
 
 .cardSlider{

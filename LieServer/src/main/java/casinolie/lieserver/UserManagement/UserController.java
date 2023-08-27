@@ -20,7 +20,7 @@ public class UserController {
     private UserRepository userRepository;
     
     
-    private String getPasswordHash(String password){
+    public static String getPasswordHash(String password){
         MessageDigest md = null;
         try {
             md = MessageDigest.getInstance("SHA-256");
@@ -50,6 +50,9 @@ public class UserController {
             return false; 
         }
         newUser.setPasswordHash(hash);
+        newUser.setCash(100L);
+        newUser.setCoinTossLuck(0.5);
+        newUser.setSlotsLuck(0.5);
         userRepository.save(newUser);
         return true;
     }
@@ -96,6 +99,81 @@ public class UserController {
         for (var user:userRepository.findAll()) {
             if (Objects.equals(user.getUsername(), username) && Objects.equals(user.getPasswordHash(), hash)) {
                 user.setCash(100L);
+                userRepository.save(user);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    @GetMapping("/user/getName")
+    public Optional<String> getName(@RequestParam String username, @RequestParam String password) {
+        for (var user:userRepository.findAll()) {
+            if (Objects.equals(user.getUsername(), username) && Objects.equals(user.getPasswordHash(), getPasswordHash(password))) {
+                return Optional.of(user.getPerceivedName());
+            }
+        }
+        return Optional.empty();
+    }
+    
+    @PostMapping("/user/setName")
+    public Boolean setName(@RequestBody Map<String,String> requestData) {
+        String username = requestData.get("username");
+        String password = requestData.get("password");
+        String hash = getPasswordHash(password);
+        for (var user:userRepository.findAll()) {
+            if (Objects.equals(user.getUsername(), username) && Objects.equals(user.getPasswordHash(), hash)) {
+                user.setPerceivedName(requestData.get("name"));
+                userRepository.save(user);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    @GetMapping("/user/getCoinLuck")
+    public Optional<Double> getCoinLuck(@RequestParam String username, @RequestParam String password) {
+        for (var user:userRepository.findAll()) {
+            if (Objects.equals(user.getUsername(), username) && Objects.equals(user.getPasswordHash(), getPasswordHash(password))) {
+                return Optional.of(user.getCoinTossLuck());
+            }
+        }
+        return Optional.empty();
+    }
+    
+    @PostMapping("/user/setCoinLuck")
+    public Boolean setCoinLuck(@RequestBody Map<String,String> requestData) {
+        String username = requestData.get("username");
+        String password = requestData.get("password");
+        String hash = getPasswordHash(password);
+        for (var user:userRepository.findAll()) {
+            if (Objects.equals(user.getUsername(), username) && Objects.equals(user.getPasswordHash(), hash)) {
+                user.setCoinTossLuck(Double.parseDouble(requestData.get("luck")));
+                userRepository.save(user);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    @GetMapping("/user/getSlotsLuck")
+    public Optional<Double> getSlotsLuck(@RequestParam String username, @RequestParam String password) {
+        for (var user:userRepository.findAll()) {
+            if (Objects.equals(user.getUsername(), username) && Objects.equals(user.getPasswordHash(), getPasswordHash(password))) {
+                return Optional.of(user.getSlotsLuck());
+            }
+        }
+        return Optional.empty();
+    }
+    
+    @PostMapping("/user/setSlotsLuck")
+    public Boolean setSlotsLuck(@RequestBody Map<String,String> requestData) {
+        String username = requestData.get("username");
+        String password = requestData.get("password");
+        String hash = getPasswordHash(password);
+        for (var user:userRepository.findAll()) {
+            if (Objects.equals(user.getUsername(), username) && Objects.equals(user.getPasswordHash(), hash)) {
+                user.setSlotsLuck(Double.parseDouble(requestData.get("luck")));
                 userRepository.save(user);
                 return true;
             }
