@@ -2,10 +2,10 @@
 import sassmod from "./MainPage.module.scss"
 import SettingsPage from "./SettingsPage.tsx";
 import * as utility from "./Utility.ts";
+import CoinTossPage from "./CoinTossPage.tsx";
 
 function MainPage(){
     const [showCoinToss, setShowCoinToss] = React.useState(true);
-    const [showSlots, setShowSlots] = React.useState(true);
     const [showSettings, setShowSettings] = React.useState(false);
     let [currentCredits, setCurrentCredits] = React.useState(0);
     let [startedPolling, setStartedPolling] = React.useState(false);
@@ -30,26 +30,17 @@ function MainPage(){
             <div className={sassmod.sidebar}>
                 <button className={sassmod.sidebarButton} onClick={()=>{
                     setShowCoinToss(false);
-                    setShowSlots(true);
                     setShowSettings(true);
                 }}>
                     Coin Toss
                 </button>
-                <button className={sassmod.sidebarButton} onClick={()=>{
-                    setShowCoinToss(true);
-                    setShowSlots(false);
-                    setShowSettings(true);
-                }}>
-                    Slots
-                </button>
                 <div className={sassmod.sidebarSpacer}/>
-                <div>
-                    <svg/>
-                    <p>{currentCredits}</p>
+                <div className={sassmod.creditsIndicator}>
+                    <img src={"src/assets/TailsCoin.png"} className={sassmod.coin} alt={"An image of a coin"}/>
+                    <p className={sassmod.creditsText}>{currentCredits}</p>
                 </div>
                 <button className={sassmod.sidebarButton} onClick={()=>{
                     setShowCoinToss(true);
-                    setShowSlots(true);
                     setShowSettings(false);
                 }}>
                     Settings
@@ -58,10 +49,7 @@ function MainPage(){
             <div className={sassmod.pageSplitter}/>
             <div className={sassmod.pageContainer}>
                 <div hidden={showCoinToss}>
-                    {/*TODO: Coin toss game page */}
-                </div>
-                <div hidden={showSlots}>
-                    {/*TODO: Slots game page*/}
+                    <CoinTossPage/>
                 </div>
                 <div hidden={showSettings}>
                     <SettingsPage/>

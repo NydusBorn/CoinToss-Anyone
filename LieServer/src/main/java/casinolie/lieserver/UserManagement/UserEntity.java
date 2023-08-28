@@ -62,18 +62,6 @@ public class UserEntity {
         this.coinTossLuck = coinTossLuck;
     }
     
-    @DecimalMin("0.0")
-    @DecimalMax("1.0")
-    private Double slotsLuck;
-
-    public Double getSlotsLuck() {
-        return slotsLuck;
-    }
-
-    public void setSlotsLuck(Double slotsLuck) {
-        this.slotsLuck = slotsLuck;
-    }
-    
     private Long cash;
 
     public Long getCash() {

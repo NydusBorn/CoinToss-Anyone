@@ -1,0 +1,37 @@
+﻿.coinTossPage{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.coin{
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.actionContainer{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  padding-right: 13px;
+}
+
+.winHighlight{
+  color: green;
+}
+
+.loseHighlight{
+  color: red;
+}
+
+.betField{
+  margin-top: 10px;
+  font-size: 25px;
+  height: 30px;
+}
+
+.actionDivider{
+  width: 10px;
+}
