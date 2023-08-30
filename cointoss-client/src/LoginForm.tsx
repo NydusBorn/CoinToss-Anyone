@@ -90,7 +90,7 @@ function LoginForm() {
     
     return (
         <div className={sassmod.loginForm}>
-            <h1>Welcome to a Casino Lie instance</h1>
+            <h1>Welcome to a &aposCoinToss Anyone?&apos instance</h1>
 
             <div hidden={userSelected} className={sassmod.card} >
                 <div className={sassmod.enterArea}>

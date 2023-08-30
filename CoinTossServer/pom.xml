@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>CasinoLie</groupId>
-    <artifactId>LieServer</artifactId>
+    <artifactId>CoinTossServer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>LieServer</name>
     <description>LieServer</description>

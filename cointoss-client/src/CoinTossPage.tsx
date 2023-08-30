@@ -68,6 +68,8 @@ function CoinTossPage(){
                 <div className={sassmod.actionDivider}/>
                 <button onClick={()=>void makeToss(false)}>Bet on Tails</button>
             </div>
+            <div className={sassmod.betFieldContainer}>
+            <p className={sassmod.betFieldDescriptor}>Bet amount</p>
             <textarea className={classNames(sassutil.sizeUnchangeable, sassmod.betField)} onChange={event => {
                 const bet = parseInt(event.target.value);
                 if (isNaN(bet) || bet < 1) {
@@ -78,6 +80,7 @@ function CoinTossPage(){
                     setCurrentBet(bet);
                 }
             }}/>
+            </div>
             <p>{currentMessage}</p>
         </div>
     )
